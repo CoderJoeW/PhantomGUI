@@ -28,9 +28,9 @@ namespace PhantomGUI
             InitializeComponent();
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
-            UpdateConnectionsList();
+            await UpdateConnectionsList();
             CenterCreateNewConnectionPanel();
         }
 
@@ -74,11 +74,11 @@ namespace PhantomGUI
 
         }
 
-        private void UpdateConnectionsList()
+        private async Task UpdateConnectionsList()
         {
             ClearControlsList();
 
-            List<PhantomInfo> t_phantom_info_list = db.GetPhantomInfosAsync().Result;
+            List<PhantomInfo> t_phantom_info_list = await db.GetPhantomInfosAsync();
 
             foreach (PhantomInfo pi in t_phantom_info_list)
             {
@@ -129,7 +129,7 @@ namespace PhantomGUI
             create_new_connection_panel.Visible = false;
         }
 
-        private void create_new_connection_button_Click(object sender, EventArgs e)
+        private async void create_new_connection_button_Click(object sender, EventArgs e)
         {
             PhantomInfo pi = new PhantomInfo();
             pi.server_name = create_new_connection_host_textbox.Text;
@@ -137,9 +137,9 @@ namespace PhantomGUI
             pi.server_port = create_new_connection_port_textbox.Text;
             pi.worker_threads = create_new_connection_workers_textbox.Text;
 
-            db.SavePhantomInfoAsync(pi);
+            await db.SavePhantomInfoAsync(pi);
 
-            UpdateConnectionsList();
+            await UpdateConnectionsList();
 
             create_new_connection_panel.Visible = false;
         }
