@@ -38,9 +38,9 @@ namespace PhantomGUI.Helpers
             }
         }
 
-        public Task<List<PhantomInfo>> GetPhantomInfosAsync()
+        public async Task<List<PhantomInfo>> GetPhantomInfosAsync()
         {
-            return Database.Table<PhantomInfo>().ToListAsync();
+            return await Database.Table<PhantomInfo>().ToListAsync();
         }
 
         public Task<List<PhantomInfo>> DoPhantomInfoQuery(string query)
