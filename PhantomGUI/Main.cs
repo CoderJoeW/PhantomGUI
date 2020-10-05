@@ -89,10 +89,7 @@ namespace PhantomGUI
 
         private void ClearControlsList()
         {
-            foreach(Control control in phantom_connections_panel.Controls)
-            {
-                phantom_connections_panel.Controls.Remove(control);
-            }
+            phantom_connections_panel.Controls.Clear();
             ClearConnectionsList();
         }
 
@@ -103,7 +100,7 @@ namespace PhantomGUI
 
         private PhantomInfoConnectPanel CreateNewPhantonInfoConnectionButton(PhantomInfo phantom_info)
         {
-            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel();
+            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel(this);
 
             phantom_info_connection.phantom_info = phantom_info;
 
@@ -144,9 +141,14 @@ namespace PhantomGUI
             create_new_connection_panel.Visible = false;
         }
 
-        public void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
+        public void SetMainTextboxes(string hostname)
         {
-            //UpdateConnectionsList();
+            hostname_textbox.Text = hostname;
+        }
+
+        public async void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
+        {
+            await UpdateConnectionsList();
         }
 
         #region Drawing
