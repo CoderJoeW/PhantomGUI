@@ -89,10 +89,7 @@ namespace PhantomGUI
 
         private void ClearControlsList()
         {
-            foreach(Control control in phantom_connections_panel.Controls)
-            {
-                phantom_connections_panel.Controls.Remove(control);
-            }
+            phantom_connections_panel.Controls.Clear();
             ClearConnectionsList();
         }
 
@@ -144,9 +141,9 @@ namespace PhantomGUI
             create_new_connection_panel.Visible = false;
         }
 
-        public void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
+        public async void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
         {
-            //UpdateConnectionsList();
+            await UpdateConnectionsList();
         }
 
         #region Drawing
