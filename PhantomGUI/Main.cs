@@ -28,9 +28,9 @@ namespace PhantomGUI
             InitializeComponent();
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
-            UpdateConnectionsList();
+            await UpdateConnectionsList();
             CenterCreateNewConnectionPanel();
         }
 
