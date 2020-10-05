@@ -19,8 +19,6 @@ namespace PhantomGUI
     public partial class Main : Form
     {
         protected DBManager db = new DBManager();
-        private Thread phantom_thread;
-        private int process_id;
         private List<PhantomInfoConnectPanel> phantom_info_control_panels_list = new List<PhantomInfoConnectPanel>();
 
         public Main()
@@ -32,46 +30,6 @@ namespace PhantomGUI
         {
             await UpdateConnectionsList();
             CenterCreateNewConnectionPanel();
-        }
-
-        private void StartPhantom(string parameters)
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = Library.CreatePhantomExecutable();
-            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            p.StartInfo.Arguments = parameters;
-            p.Start();
-            process_id = p.Id;
-        }
-
-        private void start_phantom_btn_Click(object sender, EventArgs e)
-        {
-            start_phantom_btn.Visible = false;
-            stop_phantom_btn.Visible = true;
-            phantom_thread = new Thread(() => StartPhantom(CreateParametersString()));
-            phantom_thread.IsBackground = true;
-            phantom_thread.Start();
-        }
-
-        private void stop_phantom_btn_Click(object sender, EventArgs e)
-        {
-            Process p = Process.GetProcessById(process_id);
-            p.Kill();
-            Library.DeletePhantomExecutable();
-            stop_phantom_btn.Visible = false;
-            start_phantom_btn.Visible = true;
-        }
-
-        private string CreateParametersString()
-        {
-            string parameters = "--server " + hostname_textbox.Text + ":" + port_textbox.Text + " --workers " + worker_textbox.Text;
-
-            return parameters;
-        }
-
-        private void advanced_settinsg_button_Click(object sender, EventArgs e)
-        {
-
         }
 
         private async Task UpdateConnectionsList()
@@ -89,10 +47,7 @@ namespace PhantomGUI
 
         private void ClearControlsList()
         {
-            foreach(Control control in phantom_connections_panel.Controls)
-            {
-                phantom_connections_panel.Controls.Remove(control);
-            }
+            phantom_connections_panel.Controls.Clear();
             ClearConnectionsList();
         }
 
@@ -144,9 +99,9 @@ namespace PhantomGUI
             create_new_connection_panel.Visible = false;
         }
 
-        public void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
+        public async void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
         {
-            //UpdateConnectionsList();
+            await UpdateConnectionsList();
         }
 
         #region Drawing

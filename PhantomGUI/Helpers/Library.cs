@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhantomGUI.Models;
 
 namespace PhantomGUI.Helpers
 {
     public static class Library
     {
-        public static string CreatePhantomExecutable()
+        public static string CreateParametersString(PhantomInfo pi)
         {
-            string tempExeName = Contants.GetPhantomExecutableLocation();
+            string parameters = "--server " + pi.server_address + ":" + pi.server_port + " --workers " + pi.worker_threads;
+
+            return parameters;
+        }
+
+        public static string CreatePhantomExecutable(string instance)
+        {
+            string tempExeName = Contants.GetPhantomExecutableLocation(instance);
 
             using (FileStream fsDst = new FileStream(tempExeName, FileMode.CreateNew, FileAccess.Write))
             {
@@ -23,9 +31,9 @@ namespace PhantomGUI.Helpers
             return tempExeName;
         }
 
-        public static void DeletePhantomExecutable()
+        public static void DeletePhantomExecutable(string instance)
         {
-            File.Delete(Contants.GetPhantomExecutableLocation());
+            File.Delete(Contants.GetPhantomExecutableLocation(instance));
         }
 
         private static byte[] GetPhantomExe()

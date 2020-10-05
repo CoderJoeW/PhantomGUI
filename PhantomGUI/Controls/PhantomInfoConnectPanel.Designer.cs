@@ -30,6 +30,7 @@
         {
             this.connect_btn = new System.Windows.Forms.Button();
             this.delete_button = new System.Windows.Forms.Button();
+            this.stop_instance_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // connect_btn
@@ -56,10 +57,22 @@
             this.delete_button.UseVisualStyleBackColor = true;
             this.delete_button.Click += new System.EventHandler(this.delete_button_Click);
             // 
+            // stop_instance_button
+            // 
+            this.stop_instance_button.Location = new System.Drawing.Point(58, 44);
+            this.stop_instance_button.Name = "stop_instance_button";
+            this.stop_instance_button.Size = new System.Drawing.Size(75, 23);
+            this.stop_instance_button.TabIndex = 2;
+            this.stop_instance_button.Text = "Stop";
+            this.stop_instance_button.UseVisualStyleBackColor = true;
+            this.stop_instance_button.Visible = false;
+            this.stop_instance_button.Click += new System.EventHandler(this.stop_instance_button_Click);
+            // 
             // PhantomInfoConnectPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.stop_instance_button);
             this.Controls.Add(this.delete_button);
             this.Controls.Add(this.connect_btn);
             this.Name = "PhantomInfoConnectPanel";
@@ -73,5 +86,6 @@
 
         public System.Windows.Forms.Button connect_btn;
         private System.Windows.Forms.Button delete_button;
+        private System.Windows.Forms.Button stop_instance_button;
     }
 }
