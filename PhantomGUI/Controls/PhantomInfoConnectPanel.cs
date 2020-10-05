@@ -22,17 +22,14 @@ namespace PhantomGUI.Controls
 
         DBManager db = new DBManager();
 
-        private readonly Main _main;
-
-        public PhantomInfoConnectPanel(Main main)
+        public PhantomInfoConnectPanel()
         {
             InitializeComponent();
-            _main = main;
         }
 
         private void connect_btn_Click(object sender, EventArgs e)
         {
-            _main.SetMainTextboxes(phantom_info.server_address);
+
         }
 
         private void PhantomInfoConnectPanel_Load(object sender, EventArgs e)

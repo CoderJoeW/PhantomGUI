@@ -100,7 +100,7 @@ namespace PhantomGUI
 
         private PhantomInfoConnectPanel CreateNewPhantonInfoConnectionButton(PhantomInfo phantom_info)
         {
-            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel(this);
+            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel();
 
             phantom_info_connection.phantom_info = phantom_info;
 
@@ -139,11 +139,6 @@ namespace PhantomGUI
             await UpdateConnectionsList();
 
             create_new_connection_panel.Visible = false;
-        }
-
-        public void SetMainTextboxes(string hostname)
-        {
-            hostname_textbox.Text = hostname;
         }
 
         public async void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
