@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PhantomGUI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A GUI built ontop of https://github.com/jhead/phantom")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PhantomGUI")]
