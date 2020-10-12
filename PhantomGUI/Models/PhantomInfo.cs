@@ -18,5 +18,17 @@ namespace PhantomGUI.Models
         public string server_port { set; get; }
 
         public string worker_threads { set; get; }
+
+        public bool ipv6 { get; set; }
+
+        public bool debug { get; set; }
+
+        public bool remove_ports { get; set; }
+
+        public string timeout { get; set; }
+
+        public string bind { get; set; }
+
+        public string bind_port { get; set; }
     }
 }

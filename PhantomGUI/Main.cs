@@ -86,11 +86,23 @@ namespace PhantomGUI
 
         private async void create_new_connection_button_Click(object sender, EventArgs e)
         {
+            if (!IsValidTimeoutValue())
+            {
+                MessageBox.Show("Please provide a valid number for the timeout value", "Invalid Timeout Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             PhantomInfo pi = new PhantomInfo();
             pi.server_name = create_new_connection_host_textbox.Text;
             pi.server_address = create_new_connection_host_textbox.Text;
             pi.server_port = create_new_connection_port_textbox.Text;
             pi.worker_threads = create_new_connection_workers_textbox.Text;
+            pi.timeout = create_new_connection_timeout_textbox.Text;
+            pi.ipv6 = create_new_connection_ipv6_checkbox.Checked;
+            pi.remove_ports = create_new_connection_remove_ports_checkbox.Checked;
+            pi.debug = create_new_connection_debug_checkbox.Checked;
+            pi.bind = create_new_connection_binding_textbox.Text;
+            pi.bind_port = create_new_connection_binding_port_textbox.Text;
 
             await db.SavePhantomInfoAsync(pi);
 
@@ -102,6 +114,14 @@ namespace PhantomGUI
         public async void OnPhantomInfoConnectPanelDeleted(object sender,EventArgs e)
         {
             await UpdateConnectionsList();
+        }
+
+        private bool IsValidTimeoutValue()
+        {
+            if (string.IsNullOrEmpty(create_new_connection_timeout_textbox.Text))
+                return true;
+
+            return int.TryParse(create_new_connection_timeout_textbox.Text, out _);
         }
 
         #region Drawing
