@@ -1,4 +1,7 @@
 # PhantomGUI
+[![Downloads](https://img.shields.io/github/downloads/flaminggenius/PhantomGUI/total)](https://github.com/flaminggenius/PhantomGUI/releases)
+
+
 A GUI built on top of https://github.com/jhead/phantom
 
 ![Feature Image](https://i.ibb.co/hMMhxr1/Capture.png)
