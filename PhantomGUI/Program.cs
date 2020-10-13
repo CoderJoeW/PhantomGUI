@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PhantomGUI
 {
-    static class Program
+    internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
+            if (Environment.OSVersion.Version.Major >= 6)
+                SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
         }
+
+        [DllImport("user32.dll", EntryPoint = "SetProcessDPIAware")]
+        private static extern bool SetProcessDPIAware();
     }
 }
