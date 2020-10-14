@@ -1,5 +1,8 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.IO;
+using System.Reflection;
+using PhantomLib.Models;
 
 namespace PhantomLib.Services
 {
@@ -17,8 +20,20 @@ namespace PhantomLib.Services
             _baseExeBytes = baseExeBytes;
         }
 
-        public bool TryCreatePhantomExecutable(string exePath)
+        public PhantomFactory()
         {
+            var assembly = this.GetType().GetTypeInfo().Assembly;
+            var memoryStream = new MemoryStream(); 
+            assembly.GetManifestResourceStream("PhantomLib.Resources.phantom.exe")?.CopyTo(memoryStream);
+            _baseExeBytes = memoryStream.ToArray();
+        }
+
+        public bool TryCreatePhantomExecutable(PhantomInfo phantomInfo, out string exePath, string serverFolderPath = "./Servers/")
+        {
+            if (Directory.Exists(serverFolderPath) == false)
+                Directory.CreateDirectory(serverFolderPath);
+            
+            exePath = serverFolderPath + phantomInfo.ServerName + "_phantom.exe";
             try
             {
                 using (var stream = new FileStream(exePath, FileMode.Create, FileAccess.Write))
