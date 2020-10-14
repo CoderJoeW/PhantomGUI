@@ -1,0 +1,17 @@
+﻿<Application x:Class="PhantomWPFUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:PhantomWPFUI.ViewModels"
+             xmlns:views="clr-namespace:PhantomWPFUI.Views">
+    <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                 <ResourceDictionary>
+                     <DataTemplate DataType="{x:Type vm:ConnectionDialogViewModel}">
+                         <views:PhantomCreationDialogView/>
+                     </DataTemplate>
+                 </ResourceDictionary>
+             </ResourceDictionary.MergedDictionaries>
+         </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PhantomGUI.Models;
 using PhantomGUI.Helpers;
 using System.Diagnostics;
+using PhantomLib.Models;
 
 namespace PhantomGUI.Controls
 {
@@ -36,7 +36,7 @@ namespace PhantomGUI.Controls
         private void StartPhantomInstance(string parameters)
         {
             Process p = new Process();
-            p.StartInfo.FileName = Library.CreatePhantomExecutable(phantom_info.server_name);
+            p.StartInfo.FileName = Library.CreatePhantomExecutable(phantom_info.ServerName);
             p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             p.StartInfo.Arguments = parameters;
             p.Start();
@@ -54,12 +54,12 @@ namespace PhantomGUI.Controls
 
         private void PhantomInfoConnectPanel_Load(object sender, EventArgs e)
         {
-            this.connect_btn.Text = phantom_info.server_name;
+            this.connect_btn.Text = phantom_info.ServerName;
         }
 
         private void delete_button_Click(object sender, EventArgs e)
         {
-            db.DeletePhantomInfoAsync(this.phantom_info.id);
+            db.DeletePhantomInfoAsync(this.phantom_info.Id);
             PhantomInfoConnectPanelDeleted(this, null);
             this.Visible = false;
         }
@@ -68,7 +68,7 @@ namespace PhantomGUI.Controls
         {
             Process p = Process.GetProcessById(process_id);
             p.Kill();
-            Library.DeletePhantomExecutable(phantom_info.server_name);
+            Library.DeletePhantomExecutable(phantom_info.ServerName);
             stop_instance_button.Visible = false;
         }
     }
