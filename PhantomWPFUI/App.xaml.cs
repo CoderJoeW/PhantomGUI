@@ -27,6 +27,7 @@ namespace PhantomWPFUI
             new ServiceCollection()
                 .AddSingleton<MainWindowViewModel>()
                 .AddSingleton<PhantomFactory>()
+                .AddSingleton<PhantomRunner>()
                 .AddSingleton<IDialogService, DialogService>()
                 .BuildServiceProvider();
     }
