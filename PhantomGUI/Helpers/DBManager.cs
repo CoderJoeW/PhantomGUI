@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
-using PhantomGUI.Models;
 using PhantomGUI.Extensions;
+using PhantomLib.Models;
 
 namespace PhantomGUI.Helpers
 {
@@ -50,12 +50,12 @@ namespace PhantomGUI.Helpers
 
         public Task<PhantomInfo> GetPhantomInfoAsync(int id)
         {
-            return Database.Table<PhantomInfo>().Where(i => i.id == id).FirstOrDefaultAsync();
+            return Database.Table<PhantomInfo>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public Task<int> SavePhantomInfoAsync(PhantomInfo phantom_info)
         {
-            PhantomInfo existing_phantom_info = GetPhantomInfoAsync(phantom_info.id).Result;
+            PhantomInfo existing_phantom_info = GetPhantomInfoAsync(phantom_info.Id).Result;
 
             if (existing_phantom_info == null)
             {

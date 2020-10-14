@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PhantomGUI.Models;
+using PhantomLib.Models;
 
 namespace PhantomGUI.Helpers
 {
@@ -13,26 +13,26 @@ namespace PhantomGUI.Helpers
         public static string CreateParametersString(PhantomInfo pi)
         {
             string result;
-            string phantomParameters = string.Format($"--server {pi.server_address}:{pi.server_port} --workers {pi.worker_threads}");
+            string phantomParameters = string.Format($"--server {pi.ServerAddress}:{pi.ServerPort} --workers {pi.WorkerThreads}");
             StringBuilder phantomOptions = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(pi.timeout) && pi.timeout != "60")
-                phantomOptions.AppendFormat($" --timeout {pi.timeout}");
+            if (!string.IsNullOrEmpty(pi.Timeout) && pi.Timeout != "60")
+                phantomOptions.AppendFormat($" --timeout {pi.Timeout}");
 
-            if (pi.ipv6)
-                phantomOptions.AppendFormat($" --6={pi.ipv6.ToString().ToLower()}");
+            if (pi.Ipv6)
+                phantomOptions.AppendFormat($" --6={pi.Ipv6.ToString().ToLower()}");
            
-            if (pi.debug)
-                phantomOptions.AppendFormat($" --debug={pi.debug.ToString().ToLower()}");
+            if (pi.Debug)
+                phantomOptions.AppendFormat($" --debug={pi.Debug.ToString().ToLower()}");
 
-            if (pi.remove_ports)
-                phantomOptions.AppendFormat($" --remove_ports={pi.remove_ports.ToString().ToLower()}");
+            if (pi.RemovePorts)
+                phantomOptions.AppendFormat($" --remove_ports={pi.RemovePorts.ToString().ToLower()}");
 
-            if (!string.IsNullOrEmpty(pi.bind))
-                phantomOptions.AppendFormat($" --bind \"{pi.bind}\"");
+            if (!string.IsNullOrEmpty(pi.Bind))
+                phantomOptions.AppendFormat($" --bind \"{pi.Bind}\"");
 
-            if (!string.IsNullOrEmpty(pi.bind_port))
-                phantomOptions.AppendFormat($" --bind_port {pi.bind_port}");
+            if (!string.IsNullOrEmpty(pi.BindPort))
+                phantomOptions.AppendFormat($" --bind_port {pi.BindPort}");
 
             if (phantomOptions.Length > 0)
                 result = string.Format($"{phantomOptions} {phantomParameters}");

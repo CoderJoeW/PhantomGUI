@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PhantomGUI.Helpers;
 using PhantomGUI.Controls;
-using PhantomGUI.Models;
+using PhantomLib.Models;
 
 namespace PhantomGUI
 {
@@ -58,13 +51,13 @@ namespace PhantomGUI
 
         private PhantomInfoConnectPanel CreateNewPhantonInfoConnectionButton(PhantomInfo phantom_info)
         {
-            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel();
+            PhantomInfoConnectPanel phantom_info_connection = new PhantomInfoConnectPanel
+            {
+                phantom_info = phantom_info, 
+                Size = new Size(194, 70), 
+                Parent = phantom_connections_panel
+            };
 
-            phantom_info_connection.phantom_info = phantom_info;
-
-            phantom_info_connection.Size = new Size(194, 70);
-
-            phantom_info_connection.Parent = phantom_connections_panel;
             phantom_info_connection.Location = new Point(3, (phantom_info_control_panels_list.Count * phantom_info_connection.Height) + (3 * phantom_info_control_panels_list.Count));
 
             phantom_info_control_panels_list.Add(phantom_info_connection);
@@ -92,17 +85,19 @@ namespace PhantomGUI
                 return;
             }
 
-            PhantomInfo pi = new PhantomInfo();
-            pi.server_name = create_new_connection_host_textbox.Text;
-            pi.server_address = create_new_connection_host_textbox.Text;
-            pi.server_port = create_new_connection_port_textbox.Text;
-            pi.worker_threads = create_new_connection_workers_textbox.Text;
-            pi.timeout = create_new_connection_timeout_textbox.Text;
-            pi.ipv6 = create_new_connection_ipv6_checkbox.Checked;
-            pi.remove_ports = create_new_connection_remove_ports_checkbox.Checked;
-            pi.debug = create_new_connection_debug_checkbox.Checked;
-            pi.bind = create_new_connection_binding_textbox.Text;
-            pi.bind_port = create_new_connection_binding_port_textbox.Text;
+            PhantomInfo pi = new PhantomInfo
+            {
+                ServerName = create_new_connection_host_textbox.Text,
+                ServerAddress = create_new_connection_host_textbox.Text,
+                ServerPort = create_new_connection_port_textbox.Text,
+                WorkerThreads = create_new_connection_workers_textbox.Text,
+                Timeout = create_new_connection_timeout_textbox.Text,
+                Ipv6 = create_new_connection_ipv6_checkbox.Checked,
+                RemovePorts = create_new_connection_remove_ports_checkbox.Checked,
+                Debug = create_new_connection_debug_checkbox.Checked,
+                Bind = create_new_connection_binding_textbox.Text,
+                BindPort = create_new_connection_binding_port_textbox.Text
+            };
 
             await db.SavePhantomInfoAsync(pi);
 
